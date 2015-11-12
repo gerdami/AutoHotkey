@@ -8,6 +8,8 @@ NOTEPADPLUSPLUS = "Notepad++ [V] 6.2.3bd001"
 
 ; Any lines you want to execute immediately when the script starts should appear at the top of the script, prior to the first hotkey, hotstring, or Return. For details, see auto-execute section.
 
+#Include %A_ScriptDir%\GlobalVariables.ahk
+
 #Include %A_ScriptDir%\TrayTipAutoHotkeyStartedReloaded.ahk
 SetWorkingDir %A_ScriptDir%		; since AutoHotKey.ahk is within a custom directory, not My Documents
 ;MsgBox A_WorkingDir:`t%A_WorkingDir%
