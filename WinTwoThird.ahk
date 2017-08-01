@@ -23,16 +23,16 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; Windows + Up arrow
 ; Windows + Down arrow
 ; ----------------------------------------------------------------------------
-GetTaskBarDetails()
-	{
-	    Global	; If a function needs to access or create a large number of global variables, it can be defined to assume that all its variables are global 
-		WinGetPos, TaskBarXpos, TaskBarYpos, TaskBarWidth, TaskBarHeight, ahk_class Shell_TrayWnd
-		;MsgBox, TaskBar details`nXpos:`t`t%TaskBarXpos%`nYpos:`t`t%TaskBarYpos%`nWidth:`t`t%TaskBarWidth%`nHeight:`t`t%TaskBarHeight%`nA_ScreenWidth:`t%A_ScreenWidth%`nA_ScreenHeight:`t%A_ScreenHeight%
-		TaskBarXpos *=1
-		TaskBarYpos *=1
-		TaskBarWidth *=1
-		TaskBarHeight *=1
-	}	
+; GetTaskBarDetails()
+;	{
+;	    Global	; If a function needs to access or create a large number of global variables, it can be defined to assume that all its variables are global 
+;		WinGetPos, TaskBarXpos, TaskBarYpos, TaskBarWidth, TaskBarHeight, ahk_class Shell_TrayWnd
+;		;MsgBox, TaskBar details`nXpos:`t`t%TaskBarXpos%`nYpos:`t`t%TaskBarYpos%`nWidth:`t`t%TaskBarWidth%`nHeight:`t`t%TaskBarHeight%`nA_ScreenWidth:`t%A_ScreenWidth%`nA_ScreenHeight:`t%A_ScreenHeight%
+;		TaskBarXpos *=1
+;		TaskBarYpos *=1
+;		TaskBarWidth *=1
+;		TaskBarHeight *=1
+;	}	
 
 ^#Numpad6:: 	;	Control + Windows + Numpad6  ->   2/3 window aligned right 
 
