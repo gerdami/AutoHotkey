@@ -63,6 +63,21 @@ SnapActiveWindow(winPlaceVertical, winPlaceHorizontal, winSizeHeight, winSizeWid
     } else {	; "top"
         posY := MonitorWorkAreaTop
     }
+	
+	;	If Window is maximised, it should be first restored
+	WinGet, MinMaxState, MinMax
+	If (MinMaxState = 1) {
+		WinRestore, A
+	}
+	
+	;	Dealing with win10 invisible frames
+    SysGet, borderX, 32
+    SysGet, borderY, 33
+        posX := posX - borderX
+        width := width + (borderX * 2)
+        height := height + borderY
+	
+	
     WinMove,A,,%posX%,%posY%,%width%,%height%
 }
 /**
@@ -102,6 +117,10 @@ GetMonitorIndexFromWindow(windowHandle) {
 }
 ; SnapActiveWindow(winPlaceVertical, winPlaceHorizontal, winSizeHeight, winSizeWidth)
 ; Directional Arrow Hotkeys
+
+#Left::SnapActiveWindow("top","left","full","half")
+#Right::SnapActiveWindow("top","right","full","half")
+
 #!Up::SnapActiveWindow("top","full","half","full")
 #!Down::SnapActiveWindow("bottom","full","half","full")
 ^#!Up::SnapActiveWindow("top","full","third","full")
