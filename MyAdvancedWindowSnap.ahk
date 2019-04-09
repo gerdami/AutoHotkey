@@ -22,6 +22,9 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
  * @param {string} winSizeHeight      The height of the active window in relation to
  *                                    the active monitor's height. Expecting "half" size,
  *                                    otherwise will resize window to a "third".
+ * @param {string} winSizeWidth       The width of the active window in relation to
+ *                                    the active monitor's width. Expecting "oneFourth", "threeFourth",
+ *                                    "oneThird", "twoThird", "half", otherwise "full".
  */
 SnapActiveWindow(winPlaceVertical, winPlaceHorizontal, winSizeHeight, winSizeWidth) {
     WinGet activeWin, ID, A
@@ -125,6 +128,13 @@ GetMonitorIndexFromWindow(windowHandle) {
 #!Down::SnapActiveWindow("bottom","full","half","full")
 ^#!Up::SnapActiveWindow("top","full","third","full")
 ^#!Down::SnapActiveWindow("bottom","full","third","full")
+
+^#Numpad7::SnapActiveWindow("top","left","half","half")
+^#Numpad9::SnapActiveWindow("top","right","half","half")
+^#Numpad1::SnapActiveWindow("bottom","left","half","half")
+^#Numpad3::SnapActiveWindow("bottom","right","half","half")
+
+
 
 ; Numberpad Hotkeys (Landscape)
 #!Numpad7::SnapActiveWindow("top","left","full","twoThird")
