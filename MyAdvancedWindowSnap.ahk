@@ -1,8 +1,8 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-
+#SingleInstance Force    ;The word FORCE skips the dialog box and replaces the old instance automatically, which is similar in effect to the 
 
 /**
  * Advanced Window Snap
@@ -26,6 +26,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
  *                                    the active monitor's width. Expecting "oneFourth", "threeFourth",
  *                                    "oneThird", "twoThird", "half", otherwise "full".
  */
+
 SnapActiveWindow(winPlaceVertical, winPlaceHorizontal, winSizeHeight, winSizeWidth) {
     WinGet activeWin, ID, A
     activeMon := GetMonitorIndexFromWindow(activeWin)
@@ -68,20 +69,33 @@ SnapActiveWindow(winPlaceVertical, winPlaceHorizontal, winSizeHeight, winSizeWid
     }
 	
 	;	If Window is maximised, it should be first restored
-	WinGet, MinMaxState, MinMax
-	If (MinMaxState = 1) {
+	WinGetActiveTitle, ActiveTitle
+	WinGet, Win_Status, MinMax, ActiveTitle
+	; msgbox ActiveTitle = %ActiveTitle%,Win_Status = %Win_Status%
+	; Win_Status remins blank :-( 
+	If (Win_Status = 1) {
 		WinRestore, A
 	}
 	
-	;	Dealing with win10 invisible frames
-    SysGet, borderX, 32
-    SysGet, borderY, 33
-        posX := posX - borderX
-        width := width + (borderX * 2)
-        height := height + borderY
-	
-	
-    WinMove,A,,%posX%,%posY%,%width%,%height%
+	;	Dealing with win10 invisible frames - 03.12.2021 Disabled
+    ;   07.12.2021
+    WinGet, ahk_exe, ProcessName, A
+    ; MsgBox %  "`nahk_exe = " ahk_exe
+    Switch  ahk_exe
+    {
+        Case "chrome.exe","edge.exe","iexplore.exe","explorer.exe" :
+            SysGet, borderX, 32
+            SysGet, borderY, 33
+            posX := posX - borderX
+            width := width + (borderX * 2)
+            height := height + borderY
+        Default:
+            ;   nothing
+            ;   default Office applications, e.g. Outlook, Excel, Word, etc.
+    }
+		
+    WinRestore, A
+	WinMove,A,,%posX%,%posY%,%width%,%height%
 }
 /**
  * GetMonitorIndexFromWindow retrieves the HWND (unique ID) of a given window.
